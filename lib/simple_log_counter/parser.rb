@@ -33,11 +33,11 @@ module SimpleLogCounter
       end
 
       def page_from_line(line)
-        line.split[0]
+        line.match(%r{(^|(?<=\s))/\S*((?=\s)|$)}).to_s
       end
 
       def visitor_from_line(line)
-        line.split[1]
+        line.match(/(\d+\.){3}\d+/).to_s
       end
     end
   end

@@ -84,4 +84,89 @@ RSpec.describe SimpleLogCounter::Parser do
       end
     end
   end
+
+  describe '#visitor_from_line' do
+    # NOTE: as this is a private method of Parser it needs to be called with #send
+    it 'reads from simple log format' do
+      expect(
+        described_class.send(:visitor_from_line, '/ 1.2.3.4')
+      ).to eql '1.2.3.4'
+    end
+
+    it 'reads from reversed simple log format' do
+      expect(
+        described_class.send(:visitor_from_line, '1.2.3.4 /')
+      ).to eql '1.2.3.4'
+    end
+
+    it 'reads from IIS format' do
+      expect(
+        described_class.send(:visitor_from_line, '02:49:12 127.0.0.1 GET / 200')
+      ).to eql '127.0.0.1'
+    end
+
+    it 'reads from Apache format' do
+      line = '192.168.198.92 - - [22/Dec/2002:23:08:37 -0400] "GET / HTTP/1.1" 200 6394 www.yahoo.com "-" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1...)" "-"'
+      expect(
+        described_class.send(:visitor_from_line, line)
+      ).to eql '192.168.198.92'
+    end
+  end
+
+  describe '#page_from_line' do
+    # NOTE: as this is a private method of Parser it needs to be called with #send
+    context 'when root page' do
+      it 'reads from simple log format' do
+        expect(
+          described_class.send(:page_from_line, '/ 1.2.3.4')
+        ).to eql '/'
+      end
+
+      it 'reads from reversed simple log format' do
+        expect(
+          described_class.send(:page_from_line, '1.2.3.4 /')
+        ).to eql '/'
+      end
+
+      it 'reads from IIS format' do
+        expect(
+          described_class.send(:page_from_line, '02:49:12 127.0.0.1 GET / 200')
+        ).to eql '/'
+      end
+
+      it 'reads from Apache format' do
+        line = '192.168.198.92 - - [22/Dec/2002:23:08:37 -0400] "GET / HTTP/1.1" 200 6394 www.yahoo.com "-" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1...)" "-"'
+        expect(
+          described_class.send(:page_from_line, line)
+        ).to eql '/'
+      end
+    end
+
+    context 'when non-root page' do
+      it 'reads from simple log format' do
+        expect(
+          described_class.send(:page_from_line, '/home 1.2.3.4')
+        ).to eql '/home'
+      end
+
+      it 'reads from reversed simple log format' do
+        expect(
+          described_class.send(:page_from_line, '1.2.3.4 /home/2')
+        ).to eql '/home/2'
+      end
+
+      it 'reads from IIS format' do
+        expect(
+          described_class.send(:page_from_line, '02:49:12 127.0.0.1 GET /home.html 200')
+        ).to eql '/home.html'
+      end
+
+      it 'reads from Apache format' do
+        line = '192.168.198.92 - - [22/Dec/2002:23:08:37 -0400] "GET /home HTTP/1.1" 200 6394 www.yahoo.com "-" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1...)" "-"'
+        expect(
+          described_class.send(:page_from_line, line)
+        ).to eql '/home'
+      end
+    end
+  end
 end
