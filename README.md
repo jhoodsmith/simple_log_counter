@@ -15,7 +15,7 @@ parameter.
 Using exiting command-line tools, the non-unique version of this task for
 counting visits to a given web page could be solved like so:
 
-	$ cat webserver.log | grep /home | sort | wc -l
+	$ cat webserver.log | grep /home | wc -l
 	
 I therefore wanted my new solution, which summaries counts for all web pages, to
 be used like:
