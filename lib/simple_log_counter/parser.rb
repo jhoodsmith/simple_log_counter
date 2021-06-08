@@ -4,12 +4,13 @@ require 'set'
 
 module SimpleLogCounter
   # Parser class for translating web log to dictionary of indiviual page counts.
-  # Algorithm centres around a reduction operation, time complexity = O(n)
 
   class Parser
     class << self
-      # Parses web log file to dicionary of page counts
-      # Time complexity
+      # Parses web log file to dicionary of page counts.
+      #
+      # Algorithm centres around a reduction operation, so time complexity =
+      # O(n)
       def parse(log, unique: false)
         page_count_pairs = if unique
                              unique_visitor_counter(log)
@@ -18,7 +19,6 @@ module SimpleLogCounter
                            end
 
         # Convert back to hash and sort in descending order.
-        # TODO: make the direction of sorting a parameter
         Hash[page_count_pairs.sort_by { |_, n| -n }]
       end
 
