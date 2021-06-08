@@ -63,7 +63,7 @@ The responsibility for parsing a text stream into a hash of page counts is in
 [SimpleLogCounter::Parser](lib/simple_log_counter/parser.rb). The responsibility
 for printing to screen is in
 [SimpleLogCounter::Formatter](lib/simple_log_counter/formatter.rb). All methods
-were implemented as class methods as the initial domain modelling did not
+were implemented as class methods as the initial modelling did not
 suggest the need for management of additional state.
 
 ### Extension
