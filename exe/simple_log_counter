@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'bundler/setup'
+require 'simple_log_counter'
+
+unique = ARGV[0] == '--unique' ? ARGV.shift : nil
+
+if (ARGF.filename != '-') || (!$stdin.tty? && !$stdin.closed?)
+  page_visits = SimpleLogCounter::Parser.parse ARGF.read, unique: unique
+  puts SimpleLogCounter::Formatter.format page_visits, unique: unique
+else
+  puts 'usage: simple_log_counter filename'
+end
