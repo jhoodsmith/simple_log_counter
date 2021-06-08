@@ -14,7 +14,7 @@ receive input either from the Standard Input or a file name passed as a
 parameter.
 
 Using exiting command-line tools, the non-unique version of this task for
-counting visit to a given web page could be solved like so:
+counting visits to a given web page could be solved like so:
 
 	$ cat webserver.log | grep /home | sort | wc -l
 	
@@ -42,7 +42,7 @@ OR
 
 ### RubyGems
 
-I chose to package the task as a Ruby Gem, so I could leverage the support of
+I chose to package the application as a Ruby Gem, so I could leverage the support of
 its best-practice tooling, in particular the support for platform-independent
 installs. Please note, however, that the gem not has been added to
 [RubyGems](https://rubygems.org), so will have to be installed locally ([see
@@ -115,6 +115,9 @@ In addition to the examples above, you might want to work with the included IIS 
 - Benchmark performance
 
 - Further testing on different types of log format, such as that of Nginx.
+
+- Use [Thor](https://github.com/rails/thor) to encapsulate application as a
+  self-documenting command-line utility.
 
 - Support for Ipv6
 
