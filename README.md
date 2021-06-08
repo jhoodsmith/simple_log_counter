@@ -7,10 +7,9 @@ visits to individual web pages given a log file.
 
 ### Building a Unix Tool
 
-Despite its simplicity and limited scope, I wanted from the outset that this
-tool behave in accordance with the [Unix Tools
-Philosophy](https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/c1089.htm), and
-receive input either from the Standard Input or a file name passed as a
+I wanted from the outset that this tool behave in accordance with the [Unix
+Tools Philosophy](https://tldp.org/LDP/GNU-Linux-Tools-Summary/html/c1089.htm),
+and receive input either from the Standard Input or a file name passed as a
 parameter.
 
 Using exiting command-line tools, the non-unique version of this task for
