@@ -70,7 +70,8 @@ suggest the need for management of additional state.
 
 The original problem only required that records of the log file follow a
 simple, 2-field format, comprising page and visitor IP address. This is
-unrealistic! Examples of real log files include IIS (Internet Information Service):
+fine for a toy example, but real log files are more complex. Examples of real log files 
+include those for IIS (Internet Information Service):
 ```
 02:49:12 127.0.0.1 GET / 200
 02:49:35 127.0.0.1 GET /index.html 200
