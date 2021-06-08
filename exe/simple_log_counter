@@ -6,6 +6,8 @@ require 'simple_log_counter'
 
 unique = ARGV[0] == '--unique' ? ARGV.shift : nil
 
+# If current file is a real file (not STDIN) or if standard input is open but
+# not a terminal device
 if (ARGF.filename != '-') || (!$stdin.tty? && !$stdin.closed?)
   page_visits = SimpleLogCounter::Parser.parse ARGF.read, unique: unique
   puts SimpleLogCounter::Formatter.format page_visits, unique: unique
