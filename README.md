@@ -3,10 +3,6 @@
 This is a command line tool for counting both unique and non-unique
 visits to individual web pages given a log file.
 
-Each record of the log file is on a new line and each line is composed of two
-fields for page visited and IP address of visitor.
-
-
 ## Design Thinking
 
 ### Building a Unix Tool
@@ -71,7 +67,7 @@ suggest the need for management of additional state.
 
 ### Extension
 
-The original problem only required that each record of the log file follow
+The original problem only required records of the log file follow a
 simple, 2-field format, comprising page and visitor IP address. This is
 unrealistic! Examples of real log files include IIS (Internet Information Service):
 ```
@@ -80,7 +76,7 @@ unrealistic! Examples of real log files include IIS (Internet Information Servic
 03:01:06 127.0.0.1 GET /images/sponsered.gif 304
 ```
 
-OR Apache
+and Apache
 ```
 192.168.198.92 - - [22/Dec/2002:23:08:37 -0400] "GET / HTTP/1.1" 200 6394 www.yahoo.com "-" "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1...)" "-"
 192.168.198.92 - - [22/Dec/2002:23:08:38 -0400] "GET /images/logo.gif HTTP/1.1" 200 807 www.yahoo.com "http://www.some.com/" "Mozilla/4.0 (compatible; MSIE 6...)" "-"
@@ -89,9 +85,11 @@ OR Apache
 I thought it might be nice if the program could be extended to work with these
 more realistic examples.
 
-We will work with the following assumptions
-1. Pages start with `/` and are followed by a space
-2. IP address is IPv4 in dotted-decimal notation
+I made the following assumptions
+1. Pages start with `/`
+2. IP addresses are in IPv4 dotted-decimal notation
+
+See the [parser_spec.rb](spec/parser_spec.rb) for examples and capability.
 
 ## Installation
 
@@ -114,7 +112,7 @@ Or install it yourself as:
 
 ## Usage
 
-In addition to the examples above:
+In addition to the examples above, you might want to work with the included IIS and Apache samples.
 
 	$ simple_log_counter iis_sample.log
 	
@@ -135,6 +133,8 @@ git commits and the created tag, and push the `.gem` file to
 ## Next Steps
 
 - Benchmark performance
+
+- Further testing on different types of log format
 
 ## Contributing
 
